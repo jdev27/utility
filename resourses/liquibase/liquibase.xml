@@ -1,0 +1,22 @@
+<project name="genericproject" xmlns:liquibase="antlib:liquibase.integration.ant">
+
+	<!-- <path id="driver.classpath"> -->
+	<!-- <filelist dir="D:\dev\libs"> -->
+	<!-- <file name="mysql-connector-java-5.1.40.jar" /> -->
+	<!-- <file name="liquibase.jar" /> -->
+	<!-- </filelist> -->
+	<!-- </path> -->
+	<path id="lib.path">
+		<fileset dir="lib">
+			<include name="**/*.jar" />
+		</fileset>
+		<!-- <fileset dir="bin"> <include name="**/*.xml" /> </fileset> -->
+	</path>
+	<liquibase:updateDatabase changeLogFile="${changeLogFile}"
+		classpathref="lib.path" dropFirst="false">
+		<liquibase:database driver="com.mysql.jdbc.Driver"
+			url="jdbc:mysql://localhost:3306/${db.schema}" user="${db.user}"
+			password="${db.password}" />
+	</liquibase:updateDatabase>
+	<!-- driver.classpath -->
+</project>

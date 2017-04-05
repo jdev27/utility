@@ -1,0 +1,15 @@
+<project name="utility" xmlns:artifact="antlib:org.apache.maven.artifact.ant" xmlns:liquibase="antlib:liquibase.integration.ant">
+	<property environment="env" />
+
+	<property name="lib.dir" value="../lib" />
+
+	<path id="classpath">
+		<fileset dir="${lib.dir}" includes="**/*.jar" />
+	</path>
+
+	<liquibase:updateDatabase changeLogFile="${changeLogFile}" classpathref="classpath" dropFirst="false">
+		<liquibase:database driver="com.mysql.jdbc.Driver" url="jdbc:mysql://${db.loc}:3306/${db.schema}" user="${db.user}" password="${env.mysql_password}" />
+	</liquibase:updateDatabase>
+	
+	
+</project>

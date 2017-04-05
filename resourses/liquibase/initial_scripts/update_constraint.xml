@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+	<preConditions>
+		<dbms type="mysql" />
+	</preConditions>
+
+	<changeSet id="1_create_product_invoice_constraint" author="jeruortiz"
+		runOnChange="true">
+		<preConditions>
+			<not>
+				<foreignKeyConstraintExists
+					foreignKeyName="fk_product_invoice" foreignKeyTableName="Product" />
+			</not>
+		</preConditions>
+		<addForeignKeyConstraint constraintName="fk_product_invoice"
+			referencedTableName="Product" baseColumnNames="productId"
+			baseTableName="Invoice" referencedColumnNames="id" />
+	</changeSet>
+
+</databaseChangeLog>

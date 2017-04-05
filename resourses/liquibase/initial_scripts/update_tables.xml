@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+	<preConditions>
+		<dbms type="mysql" />
+	</preConditions>
+
+	<changeSet id="1_create_product_table" author="jeruortiz"
+		runOnChange="true">
+		<comment>Initialise Product table</comment>
+		<preConditions>
+			<not>
+				<tableExists tableName="Product" />
+			</not>
+		</preConditions>
+		<createTable tableName="Product">
+			<column name="id" type="int" autoIncrement="true">
+				<constraints nullable="false" primaryKey="true"
+					primaryKeyName="prod_pk" />
+			</column>
+			<column name="name" type="varchar(50)">
+				<constraints nullable="false" />
+			</column>
+			<column name="description" type="varchar(255)" />
+			<column name="cost" type="DECIMAL(13, 4)" />
+		</createTable>
+
+		<changeSet id="2_create_invoice_table" author="jeruortiz"
+			runOnChange="true">
+			<comment>Initialise Invoice table</comment>
+			<preConditions>
+				<not>
+					<tableExists tableName="Invoice" />
+				</not>
+			</preConditions>
+			<createTable tableName="Invoice">
+				<column name="id" type="int" autoIncrement="true">
+					<constraints nullable="false" primaryKey="true"
+						primaryKeyName="invoice_pk" />
+				</column>
+				<column name="productId" type="int" />
+				<column name="quantity" type="int" />
+				<column name="discount" type="DECIMAL(13, 4)" />
+			</createTable>
+		</changeSet>
+
+</databaseChangeLog>
